@@ -44,4 +44,14 @@ footer{text-align:center;color:#626977;font-size:9px;letter-spacing:1.1px;margin
 <div class="disclaimer">Эслатма: бу версия интерфейс прототипи. Ҳали AI моделлари, видео генератор, Instagram API ёки серверга уланмаган. Уланишлар алоҳида созланади; Instagram'да нашр ва изоҳларга жавоб бериш расмий рухсатлар ҳамда сен белгилаган назорат қоидалари билан ишлайди.</div></section></div>
 <footer>ABDULHAKIYM AI COMMAND CENTER · BUILT FOR YOUR NEXT CHAPTER</footer></main>
 <script>function sendCommand(){let v=document.getElementById('cmd').value.trim(),o=document.getElementById('out');o.style.display='block';o.textContent=v?'Демо буйруқ қабул қилинди: “'+v+'”. Ҳақиқий агентлар ҳали уланмаган.':'Аввал вазифангни ёз.';}</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://mywbsaumdulpelncdbix.supabase.co";
+const SUPABASE_KEY = "sb_publishable_vUBsRg2UXziFjloD1f4-Kg_geUOeLZq";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
 </body></html>
