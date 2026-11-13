@@ -1,57 +1,200 @@
+
 <!doctype html>
 <html lang="uz">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#08090c">
-<title>ABDULHAKIYM — AI Command Center</title>
+<title>ABDULHAKIYM AI — PRO MAX</title>
 <style>
-:root{--bg:#08090c;--surface:#101217;--surface2:#151922;--stroke:rgba(220,190,124,.16);--gold:#d9b66d;--gold2:#f3dfa9;--muted:#8f96a4;--text:#f4f1e9;--green:#7bc9a0;--shadow:0 18px 60px #0008}
-*{box-sizing:border-box}body{margin:0;color:var(--text);background:radial-gradient(ellipse at 50% -25%,#55401f55,transparent 55%),radial-gradient(ellipse at 100% 45%,#1b233355,transparent 45%),var(--bg);font:14px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;letter-spacing:.1px}
-button,textarea{font:inherit}.shell{max-width:1160px;margin:auto;padding:env(safe-area-inset-top) 16px calc(36px + env(safe-area-inset-bottom))}
-header{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--stroke);gap:10px}
-.brand{display:flex;align-items:center;gap:12px}.mark{height:43px;width:43px;border-radius:14px;display:grid;place-items:center;font-size:22px;color:var(--gold2);background:linear-gradient(145deg,#302718,#111318);border:1px solid #8d713d66;box-shadow:inset 0 1px #ffffff18,0 8px 28px #0008}
-.brand strong{font-size:12px;letter-spacing:1.5px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:1.2px;margin-top:3px}
-.header-right{display:flex;align-items:center;gap:8px}.live{font-size:10px;color:var(--green);border:1px solid #37654e80;background:#14251c;padding:7px 10px;border-radius:30px}.avatar{height:34px;width:34px;border-radius:50%;border:1px solid #9d8049;color:var(--gold2);display:grid;place-items:center;font-size:12px}
-.hero{padding:28px 0 22px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px}.kicker{font-size:10px;color:var(--gold);letter-spacing:2.2px;text-transform:uppercase}.hero h1{font-size:clamp(27px,6vw,43px);line-height:1.08;letter-spacing:-1.2px;margin:9px 0 9px;font-weight:650}.hero p{margin:0;color:var(--muted);max-width:590px;font-size:13px}.date{display:none;color:#b5a27a;font-size:11px;text-align:right;white-space:nowrap}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.section-head h2{font-size:14px;margin:0;font-weight:600;letter-spacing:.3px}.section-head span{font-size:10px;color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{padding:14px 12px;border-radius:16px;border:1px solid var(--stroke);background:linear-gradient(145deg,#191b20e8,#101217e8);box-shadow:var(--shadow);min-width:0}.stat .label{font-size:10px;color:var(--muted)}.stat strong{display:block;color:var(--gold2);font-size:23px;letter-spacing:-.6px;margin:5px 0 1px}.stat small{font-size:10px;color:#777f8c}
-.layout{display:grid;grid-template-columns:1fr;gap:13px}.panel{border:1px solid var(--stroke);border-radius:19px;background:linear-gradient(145deg,#171a20ed,#101217f2);box-shadow:var(--shadow);padding:16px}.panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.panel-title b{font-size:13px}.panel-title span{font-size:10px;color:var(--muted)}
-.agents{display:grid;grid-template-columns:1fr 1fr;gap:9px}.agent{border:1px solid #ffffff0c;background:linear-gradient(145deg,#1a1e26,#12151a);border-radius:14px;padding:12px 10px;min-height:110px}.agent-top{display:flex;justify-content:space-between;align-items:center}.agent-icon{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#302719;color:var(--gold2);font-size:16px}.pending{font-size:9px;color:#c6a76b}.agent b{display:block;font-size:12px;margin-top:9px}.agent small{display:block;color:var(--muted);font-size:10px;margin-top:3px}
-.command{position:relative}.command textarea{width:100%;min-height:116px;background:#090b0f;color:var(--text);border:1px solid #9d7e453d;border-radius:13px;padding:14px;outline:none;resize:vertical;font-size:13px}.command textarea:focus{border-color:#c7a35d;box-shadow:0 0 0 3px #c7a35d18}.command textarea::placeholder{color:#69717e}.actions{display:flex;gap:9px;align-items:center;margin-top:10px}.primary{flex:1;border:0;border-radius:12px;padding:12px 15px;background:linear-gradient(110deg,#a77c35,#e8ca83 55%,#b48b45);color:#17120a;font-weight:700;box-shadow:0 8px 24px #a77c352e}.secondary{border:1px solid var(--stroke);background:#ffffff08;color:#d9c69d;border-radius:12px;padding:11px 13px}.hint{font-size:10px;color:var(--muted);margin-top:11px;line-height:1.55}.output{display:none;margin-top:12px;padding:12px;border:1px solid #94743e66;background:#211b10;border-radius:12px;color:#ead8ad;font-size:12px}
-.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.tool{border:1px solid var(--stroke);border-radius:14px;padding:13px 10px;background:#ffffff05;min-height:96px}.tool i{font-style:normal;font-size:18px}.tool b{display:block;font-size:11px;margin-top:8px}.tool small{font-size:9px;color:var(--muted)}
-.activity{display:flex;gap:11px;align-items:center;padding:11px 0;border-bottom:1px solid #ffffff0b}.activity:last-child{border:0}.dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px #d9b66d88}.activity b{font-size:11px}.activity small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
-.disclaimer{margin-top:14px;border:1px solid #8e713b55;border-radius:12px;padding:11px 12px;color:#b6a681;background:#211b102e;font-size:10px;line-height:1.5}
-footer{text-align:center;color:#626977;font-size:9px;letter-spacing:1.1px;margin:28px 0 6px}
-@media(min-width:700px){.shell{padding-left:26px;padding-right:26px}.date{display:block}.layout{grid-template-columns:1.15fr .85fr}.agents{grid-template-columns:repeat(3,1fr)}.hero{padding-top:38px}.panel{padding:19px}.stat{padding:17px}.tools{grid-template-columns:1fr}}
-@media(max-width:380px){.stats{gap:6px}.stat{padding:11px 9px}.stat strong{font-size:20px}.agents{gap:7px}.agent{padding:10px 8px}}
-</style></head>
-<body><main class="shell">
-<header><div class="brand"><div class="mark">✦</div><div><strong>ABDULHAKIYM AI</strong><small>COMMAND CENTER · УПРАВЛАШ МАРКАЗИ</small></div></div><div class="header-right"><div class="live">● ДЕМО РЕЖИМ</div><div class="avatar">A</div></div></header>
-<section class="hero"><div><div class="kicker">Шахсий AI агентлик платформаси</div><h1>Хуш келибсан,<br>бошқарувчи.</h1><p>Ғоядан тайёр натижагача — лойиҳалар ва AI жамоангни ягона марказдан бошқар.</p></div><div class="date">PRIVATE WORKSPACE<br>VERSION 1.1 · PREMIUM UI</div></section>
-<div class="stats"><div class="stat"><div class="label">АГЕНТЛАР</div><strong>0 / 6</strong><small>Ҳали уланмаган</small></div><div class="stat"><div class="label">ФАОЛ ВАЗИФАЛАР</div><strong>0</strong><small>Навбатда вазифа йўқ</small></div><div class="stat"><div class="label">ПЛАТФОРМА</div><strong>V1.1</strong><small>Premium интерфейс</small></div></div>
-<div class="layout">
-<section><div class="section-head"><h2>AI ЖАМОАМ</h2><span>6 та мутахассис</span></div><div class="panel"><div class="agents">
-<div class="agent"><div class="agent-top"><div class="agent-icon">✍</div><span class="pending">КУТИШДА</span></div><b>Сценарист</b><small>Ғоя, матн ва сценарий</small></div>
-<div class="agent"><div class="agent-top"><div class="agent-icon">🎞</div><span class="pending">КУТИШДА</span></div><b>Режиссёр</b><small>Кадр ва визуал режа</small></div>
-<div class="agent"><div class="agent-top"><div class="agent-icon">✂</div><span class="pending">КУТИШДА</span></div><b>Монтажчи</b><small>Овоз, титр ва монтаж</small></div>
-<div class="agent"><div class="agent-top"><div class="agent-icon">◎</div><span class="pending">КУТИШДА</span></div><b>Instagram SMM</b><small>Нашр ва контент режаси</small></div>
-<div class="agent"><div class="agent-top"><div class="agent-icon">✉</div><span class="pending">КУТИШДА</span></div><b>Изоҳлар агенти</b><small>Изоҳларни саралаш</small></div>
-<div class="agent"><div class="agent-top"><div class="agent-icon">▥</div><span class="pending">КУТИШДА</span></div><b>Аналитик</b><small>Статистика ва натижа</small></div>
-</div></div>
-<div class="section-head"><h2>ИШ БЎЛИМЛАРИ</h2><span>Лойиҳалар</span></div><div class="tools"><div class="tool"><i>🎥</i><b>Видео студия</b><small>AI видео иш жараёни</small></div><div class="tool"><i>📱</i><b>Instagram</b><small>Контент ва аудитория</small></div><div class="tool"><i>⌘</i><b>Сайт ва дастурлар</b><small>Янги рақамли маҳсулотлар</small></div></div></section>
-<section><div class="section-head"><h2>МАРКАЗИЙ БУЙРУҚ</h2><span>COMMAND INPUT</span></div><div class="panel command"><textarea id="cmd" placeholder="Вазифани шу ерга ёз...&#10;Масалан: Сабр ҳақида 30 сониялик исломий Reels учун сценарий тайёрла."></textarea><div class="actions"><button class="primary" onclick="sendCommand()">✦ БУЙРУҚНИ ЮБОРИШ</button><button class="secondary" onclick="document.getElementById('cmd').value=''">Тозалаш</button></div><div class="hint">Буйруқ марказий бошқарувчига йўналтириш учун тайёрланган демо. Ҳақиқий AI агентлар кейинги босқичда уланади.</div><div id="out" class="output"></div></div>
-<div class="section-head"><h2>ФАОЛЛИК ЖУРНАЛИ</h2><span>ACTIVITY LOG</span></div><div class="panel"><div class="activity"><div class="dot"></div><div><b>Кабинет интерфейси тайёрланди</b><small>Premium дизайн · V1.1</small></div></div><div class="activity"><div class="dot" style="background:#667080"></div><div><b>AI агентлар уланишни кутмоқда</b><small>Интеграция ҳали созланмаган</small></div></div><div class="activity"><div class="dot" style="background:#667080"></div><div><b>Instagram интеграцияси</b><small>Meta рухсатлари талаб қилинади</small></div></div></div>
-<div class="disclaimer">Эслатма: бу версия интерфейс прототипи. Ҳали AI моделлари, видео генератор, Instagram API ёки серверга уланмаган. Уланишлар алоҳида созланади; Instagram'да нашр ва изоҳларга жавоб бериш расмий рухсатлар ҳамда сен белгилаган назорат қоидалари билан ишлайди.</div></section></div>
-<footer>ABDULHAKIYM AI COMMAND CENTER · BUILT FOR YOUR NEXT CHAPTER</footer></main>
-<script>function sendCommand(){let v=document.getElementById('cmd').value.trim(),o=document.getElementById('out');o.style.display='block';o.textContent=v?'Демо буйруқ қабул қилинди: “'+v+'”. Ҳақиқий агентлар ҳали уланмаган.':'Аввал вазифангни ёз.';}</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = "https://mywbsaumdulpelncdbix.supabase.co";
-const SUPABASE_KEY = "sb_publishable_vUBsRg2UXziFjloD1f4-Kg_geUOeLZq";
+:root{--bg:#08090c;--panel:#141820;--line:#d9b66d44;--gold:#e3c47f;--muted:#929baa;--text:#f5f1e8;--green:#7bc9a0}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -20%,#55401f55,transparent 55%),var(--bg);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.shell{max-width:1180px;margin:auto;padding:16px}
+header{height:72px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:10px;align-items:center}.mark{width:40px;height:40px;border:1px solid var(--line);border-radius:13px;display:grid;place-items:center;color:var(--gold);font-size:22px;background:#211b10}
+.brand b{font-size:12px;letter-spacing:1.4px}.brand small{display:block;color:var(--muted);font-size:9px}
+.status{font-size:10px;color:var(--green);border:1px solid #37654e80;border-radius:30px;padding:6px 9px}
+.hero{padding:27px 0 20px}.kicker{color:var(--gold);font-size:10px;letter-spacing:2px}
+h1{font-size:clamp(27px,5vw,42px);line-height:1.1;margin:8px 0}
+.hero p{color:var(--muted);max-width:680px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.stat,.panel{background:linear-gradient(145deg,#191d25,#101319);border:1px solid var(--line);border-radius:16px;padding:14px}
+.stat small{display:block;color:var(--muted);font-size:10px}.stat strong{display:block;color:var(--gold);font-size:23px}
+.section{margin-top:22px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}
+.section-head h2{font-size:14px;margin:0}.section-head span{font-size:10px;color:var(--muted)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+input,select,textarea{font:inherit;color:var(--text);background:#090c11;border:1px solid #ffffff20;border-radius:10px;padding:11px;min-width:0}
+input{flex:1}select{max-width:100%}
+.agents{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.agent{background:linear-gradient(145deg,#1b2029,#11151b);border:1px solid #ffffff12;border-radius:13px;padding:11px}
+.agent-top{display:flex;justify-content:space-between;align-items:center}
+.ico{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#302719;color:var(--gold);font-size:16px}
+.tag{font-size:8px;color:#c6a76b}
+.agent b{display:block;font-size:11px;margin-top:8px}
+.agent small{display:block;color:var(--muted);font-size:9px}
+.btn{border:1px solid var(--line);border-radius:10px;padding:10px 13px;background:#211b10;color:var(--gold);font-weight:650}
+.primary{background:linear-gradient(110deg,#a77c35,#e8ca83);color:#17120a;border:0}
+.modules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.module{border:1px solid var(--line);border-radius:13px;padding:12px;background:#ffffff06}
+.module b{display:block;font-size:11px;margin-top:6px}
+.module small{font-size:9px;color:var(--muted)}
+textarea{width:100%;min-height:100px}
+.actions{display:flex;gap:8px;margin-top:9px}
+.output{display:none;margin-top:10px;padding:10px;border-radius:10px;background:#211b10;border:1px solid var(--line);color:#ead8ad;font-size:11px}
+.note{color:var(--muted);font-size:10px;margin-top:10px}
+@media(min-width:720px){.agents{grid-template-columns:repeat(3,1fr)}.modules{grid-template-columns:repeat(3,1fr)}.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:15px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header>
+<div class="brand"><div class="mark">✦</div><div><b>ABDULHAKIYM AI</b><small>PRO MAX · COMMAND CENTER</small></div></div>
+<div class="status">● DEMO MODE</div>
+</header>
 
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+<section class="hero">
+<div class="kicker">YAGONA BOSHQARUV MARKAZI</div>
+<h1>AI jamoangizni<br>bir joydan boshqaring.</h1>
+<p>21 ta asosiy mutaxassis va cheklanmagan maxsus agentlar uchun boshqaruv paneli.</p>
+</section>
+
+<div class="stats">
+<div class="stat"><small>ASOSIY AGENTLAR</small><strong id="count">21</strong><small>Core agents</small></div>
+<div class="stat"><small>QO‘SHIMCHA TIZIMLAR</small><strong>6</strong><small>PRO MAX</small></div>
+<div class="stat"><small>PLATFORMA</small><strong>V2.0</strong><small>Premium UI</small></div>
+</div>
+
+<div class="layout">
+<section>
+<div class="section section-head"><h2>AI AGENTLAR JAMOASI</h2><span>21 CORE AGENTS</span></div>
+<div class="panel">
+<div class="toolbar">
+<input id="search" placeholder="Agentni qidirish..." oninput="filterAgents()">
+<select id="category" onchange="filterAgents()">
+<option value="all">Barcha yo‘nalishlar</option>
+<option value="content">Kontent</option>
+<option value="business">Biznes</option>
+<option value="tech">Texnologiya</option>
+<option value="operations">Boshqaruv</option>
+</select>
+<button class="btn primary" onclick="showCustom()">+ Yangi agent</button>
+</div>
+<div class="agents" id="agents">
+<div class="agent" data-cat="content"><div class="agent-top"><span class="ico">✍️</span><span class="tag">01</span></div><b>Scriptwriter</b><small>Ssenariy, matn va g‘oyalar</small></div>
+<div class="agent" data-cat="content"><div class="agent-top"><span class="ico">🎬</span><span class="tag">02</span></div><b>Director</b><small>Kadr va vizual rejissura</small></div>
+<div class="agent" data-cat="content"><div class="agent-top"><span class="ico">🎞️</span><span class="tag">03</span></div><b>Video Editor</b><small>Montaj, subtitr va ritm</small></div>
+<div class="agent" data-cat="content"><div class="agent-top"><span class="ico">📱</span><span class="tag">04</span></div><b>Instagram SMM</b><small>Kontent reja va nashr</small></div>
+<div class="agent" data-cat="content"><div class="agent-top"><span class="ico">💬</span><span class="tag">05</span></div><b>Comments Agent</b><small>Izohlarni boshqarish</small></div>
+<div class="agent" data-cat="business"><div class="agent-top"><span class="ico">📊</span><span class="tag">06</span></div><b>Analytics</b><small>Statistika va hisobot</small></div>
+<div class="agent" data-cat="business"><div class="agent-top"><span class="ico">📈</span><span class="tag">07</span></div><b>Business Strategist</b><small>Biznes strategiyasi</small></div>
+<div class="agent" data-cat="business"><div class="agent-top"><span class="ico">💰</span><span class="tag">08</span></div><b>Sales Agent</b><small>Sotuvlar va takliflar</small></div>
+<div class="agent" data-cat="business"><div class="agent-top"><span class="ico">🤝</span><span class="tag">09</span></div><b>Customer Support</b><small>Mijozlarga yordam</small></div>
+<div class="agent" data-cat="business"><div class="agent-top"><span class="ico">💳</span><span class="tag">10</span></div><b>Finance Agent</b><small>Moliyaviy tahlil</small></div>
+<div class="agent" data-cat="content"><div class="agent-top"><span class="ico">🎨</span><span class="tag">11</span></div><b>Graphic Designer</b><small>Grafika va dizayn</small></div>
+<div class="agent" data-cat="content"><div class="agent-top"><span class="ico">🎙️</span><span class="tag">12</span></div><b>Voice & Audio</b><small>Ovoz va audio</small></div>
+<div class="agent" data-cat="business"><div class="agent-top"><span class="ico">🔎</span><span class="tag">13</span></div><b>SEO & Growth</b><small>Auditoriya o‘sishi</small></div>
+<div class="agent" data-cat="operations"><div class="agent-top"><span class="ico">🌍</span><span class="tag">14</span></div><b>Translator</b><small>Tarjimon</small></div>
+<div class="agent" data-cat="tech"><div class="agent-top"><span class="ico">💻</span><span class="tag">15</span></div><b>Developer</b><small>Dasturchi</small></div>
+<div class="agent" data-cat="tech"><div class="agent-top"><span class="ico">🛡️</span><span class="tag">16</span></div><b>Security Agent</b><small>Xavfsizlik</small></div>
+<div class="agent" data-cat="operations"><div class="agent-top"><span class="ico">🔬</span><span class="tag">17</span></div><b>Research Agent</b><small>Tadqiqotchi</small></div>
+<div class="agent" data-cat="operations"><div class="agent-top"><span class="ico">📋</span><span class="tag">18</span></div><b>Project Manager</b><small>Loyiha boshqaruvi</small></div>
+<div class="agent" data-cat="operations"><div class="agent-top"><span class="ico">✅</span><span class="tag">19</span></div><b>Quality Control</b><small>Sifat nazorati</small></div>
+<div class="agent" data-cat="operations"><div class="agent-top"><span class="ico">🧠</span><span class="tag">20</span></div><b>Knowledge Agent</b><small>Bilimlar bazasi</small></div>
+<div class="agent" data-cat="tech"><div class="agent-top"><span class="ico">⚙️</span><span class="tag">21</span></div><b>Automation Agent</b><small>Avtomatlashtirish</small></div>
+</div>
+<p class="note">Agentlar hozircha interfeys katalogi. Haqiqiy AI bajarilishi uchun backend va model API ulanishi kerak.</p>
+</div>
+
+<div class="section section-head"><h2>PRO MAX QO‘SHIMCHA TIZIMLARI</h2><span>EXTENDED</span></div>
+<div class="modules">
+<div class="module">🌐<b>AI Browser</b><small>Veb sahifalar bilan ishlash</small></div>
+<div class="module">✈️<b>Telegram AI</b><small>Telegram integratsiyasi</small></div>
+<div class="module">🗓️<b>Smart Scheduler</b><small>Rejalashtirish</small></div>
+<div class="module">🧠<b>Long-term Memory</b><small>Uzoq muddatli xotira</small></div>
+<div class="module">🎙️<b>Voice Command</b><small>Ovozli buyruqlar</small></div>
+<div class="module">🖼️<b>Multimodal AI</b><small>Rasm, video, audio, hujjat</small></div>
+</div>
+</section>
+
+<section>
+<div class="section section-head"><h2>MARKAZIY AI BUYRUG‘I</h2><span>ORCHESTRATOR</span></div>
+<div class="panel">
+<textarea id="cmd" placeholder="Vazifani yozing..."></textarea>
+<div class="actions">
+<button class="btn primary" onclick="sendCommand()">✦ Buyruqni yuborish</button>
+<button class="btn" onclick="document.getElementById('cmd').value=''">Tozalash</button>
+</div>
+<div id="out" class="output"></div>
+<p class="note">Demo rejim: buyruqlar hali AI modeliga yuborilmaydi.</p>
+</div>
+
+<div class="section section-head"><h2>CUSTOM AGENT YARATISH</h2><span>UNLIMITED</span></div>
+<div class="panel">
+<div id="customForm" style="display:none">
+<input id="newName" placeholder="Agent nomi">
+<input id="newTask" placeholder="Agent vazifasi" style="width:100%;margin-top:8px">
+<div class="actions">
+<button class="btn primary" onclick="addCustom()">Agentni qo‘shish</button>
+<button class="btn" onclick="hideCustom()">Bekor qilish</button>
+</div>
+</div>
+<button class="btn primary" id="openCustom" onclick="showCustom()">+ Custom AI Agent</button>
+<div id="customMsg" class="note"></div>
+</div>
+
+<div class="section section-head"><h2>XAVFSIZLIK QOIDALARI</h2></div>
+<div class="panel">
+<p>🛡️ Muhim amallar foydalanuvchi tasdig‘ini talab qiladi.</p>
+<p>🔐 Maxfiy API kalitlari brauzerda saqlanmaydi.</p>
+<p>🧾 Agent harakatlari audit jurnaliga yoziladi.</p>
+<p>⛔ Ruxsatsiz o‘zgarishlar taqiqlanadi.</p>
+</div>
+</section>
+</div>
+</main>
+
+<script>
+function filterAgents(){
+const q=document.getElementById('search').value.toLowerCase();
+const c=document.getElementById('category').value;
+document.querySelectorAll('#agents .agent').forEach(a=>{
+a.style.display=a.innerText.toLowerCase().includes(q)&&(c==='all'||a.dataset.cat===c)?'':'none';
+});
+}
+function sendCommand(){
+const v=document.getElementById('cmd').value.trim();
+const o=document.getElementById('out');
+o.style.display='block';
+o.textContent=v?'Demo: buyruq qabul qilindi. Haqiqiy AI backend ulanmagan.':'Avval buyruq yozing.';
+}
+function showCustom(){
+document.getElementById('customForm').style.display='block';
+document.getElementById('openCustom').style.display='none';
+}
+function hideCustom(){
+document.getElementById('customForm').style.display='none';
+document.getElementById('openCustom').style.display='inline-block';
+}
+function addCustom(){
+const n=document.getElementById('newName').value.trim();
+const t=document.getElementById('newTask').value.trim();
+const m=document.getElementById('customMsg');
+if(!n||!t){m.textContent='Agent nomi va vazifasini kiriting.';return;}
+const a=document.createElement('div');
+a.className='agent';
+a.dataset.cat='operations';
+const b=document.createElement('b');b.textContent=n;
+const s=document.createElement('small');s.textContent=t;
+a.append(b,s);
+document.getElementById('agents').append(a);
+document.getElementById('count').textContent=document.querySelectorAll('#agents .agent').length;
+m.textContent='Agent kartasi qo‘shildi. Hozircha demo rejimida.';
+document.getElementById('newName').value='';
+document.getElementById('newTask').value='';
+hideCustom();
+filterAgents();
+}
 </script>
-</body></html>
+</body>
+</html>
