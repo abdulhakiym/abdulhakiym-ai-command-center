@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ABDULHAKIYM AI PRO MAX</title>
+<style>
+  :root { --bg:#050507; --em:#064E3B; --em2:#047857; --gold:#D6B36A; --white:#F8FAFC; }
+  * { box-sizing: border-box; }
+  body { margin:0; min-height:100vh; background:radial-gradient(circle at top,#064E3B 0%,#050507 55%);
+    color:var(--white); font-family:-apple-system,system-ui,sans-serif; padding:env(safe-area-inset-top) 16px 24px; }
+  .wrap { max-width:420px; margin:0 auto; padding-top:32px; }
+  h1 { font-size:22px; color:var(--gold); text-align:center; margin-bottom:4px; }
+  p.sub { text-align:center; opacity:.7; margin-top:0; }
+  .card { background:rgba(255,255,255,.06); border:1px solid rgba(214,179,106,.3);
+    backdrop-filter:blur(12px); border-radius:16px; padding:18px; margin-top:16px; }
+  input { width:100%; padding:14px; margin:6px 0; border-radius:10px; border:1px solid #1f6f55;
+    background:#0b1210; color:var(--white); font-size:16px; }
+  button { width:100%; padding:14px; margin-top:8px; border:0; border-radius:10px; font-size:16px;
+    font-weight:600; background:linear-gradient(90deg,#FF8C00,#FFD700); color:#050507; }
+  button.alt { background:transparent; color:var(--gold); border:1px solid var(--gold); }
+  .msg { margin-top:10px; font-size:14px; min-height:18px; }
+  .err { color:#ff8a8a; } .ok { color:#7de3b0; }
+  .ws { padding:10px 0; border-bottom:1px solid rgba(255,255,255,.1); }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ABDULHAKIYM AI PRO MAX</h1>
+  <p class="sub">Universal AI Company</p>
+
+  <div id="authView" class="card">
+    <input id="email" type="email" placeholder="Email" autocomplete="email">
+    <input id="password" type="password" placeholder="Parol (kamida 8 belgi)" autocomplete="current-password">
+    <button id="loginBtn">Kirish</button>
+    <button id="signupBtn" class="alt">Ro'yxatdan o'tish</button>
+    <div id="authMsg" class="msg"></div>
+  </div>
+
+  <div id="appView" class="hidden">
+    <div class="card">
+      <div id="who" style="opacity:.8;font-size:14px"></div>
+      <button id="logoutBtn" class="alt">Chiqish</button>
+    </div>
+    <div class="card">
+      <b>Yangi workspace</b>
+      <input id="wsName" placeholder="Workspace nomi">
+      <button id="wsCreate">Yaratish</button>
+      <div id="wsMsg" class="msg"></div>
+    </div>
+    <div class="card">
+      <b>Mening workspace'larim</b>
+      <div id="wsList"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = "https://mywbsaumdulpelncdbix.supabase.co";
+const SUPABASE_ANON_KEY = "BU_YERGA_ANON_PUBLIC_KALITNI_QOYING";
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const $ = (id) => document.getElementById(id);
+
+function say(el, text, ok) { el.textContent = text; el.className = "msg " + (ok ? "ok" : "err"); }
+
+async function render() {
+  const { data: { session } } = await db.auth.getSession();
+  $("authView").classList.toggle("hidden", !!session);
+  $("appView").classList.toggle("hidden", !session);
+  if (!session) return;
+  $("who").textContent = session.user.email;
+  await loadWorkspaces();
+}
+
+async function loadWorkspaces() {
+  const { data, error } = await db.from("workspaces").select("id,name,created_at").order("created_at");
+  const list = $("wsList");
+  list.textContent = "";
+  if (error) { list.textContent = "Xato: " + error.message; return; }
+  if (!data.length) { list.textContent = "Hali workspace yo'q."; return; }
+  data.forEach((w) => {
+    const d = document.createElement("div");
+    d.className = "ws";
+    d.textContent = w.name;
+    list.appendChild(d);
+  });
+}
+
+$("loginBtn").onclick = async () => {
+  const { error } = await db.auth.signInWithPassword({ email: $("email").value.trim(), password: $("password").value });
+  if (error) say($("authMsg"), error.message, false); else render();
+};
+
+$("signupBtn").onclick = async () => {
+  const password = $("password").value;
+  if (password.length < 8) return say($("authMsg"), "Parol kamida 8 belgi bo'lsin.", false);
+  const { error } = await db.auth.signUp({ email: $("email").value.trim(), password });
+  if (error) say($("authMsg"), error.message, false);
+  else say($("authMsg"), "Tayyor! Emailingizni tekshirib, tasdiqlang, keyin kiring.", true);
+};
+
+$("logoutBtn").onclick = async () => { await db.auth.signOut(); render(); };
+
+$("wsCreate").onclick = async () => {
+  const name = $("wsName").value.trim();
+  if (name.length < 2) return say($("wsMsg"), "Nom kamida 2 belgi.", false);
+  const { error } = await db.from("workspaces").insert({ name });
+  if (error) return say($("wsMsg"), error.message, false);
+  $("wsName").value = "";
+  say($("wsMsg"), "Workspace yaratildi.", true);
+  loadWorkspaces();
+};
+
+db.auth.onAuthStateChange(() => render());
+render();
+</script>
+</body>
+</html>
